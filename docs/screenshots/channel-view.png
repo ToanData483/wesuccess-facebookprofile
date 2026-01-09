@@ -1,0 +1,408 @@
+{
+  "success": true,
+  "url": "http://localhost:3001/",
+  "title": "INSTA.TOOLS - Premium Instagram Toolkit | WeSuccess",
+  "elementCount": 20,
+  "elements": [
+    {
+      "index": 0,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all bg-pink-50 text-[#E1306C] cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "Dashboard",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.bg-pink-50.text-[#E1306C].cursor-pointer",
+      "xpath": "/html/body/div[2]/aside[1]/nav[1]/button[1]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 76,
+        "width": 215,
+        "height": 40
+      }
+    },
+    {
+      "index": 1,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-600 hover:bg-gray-50 hover:text-gray-900 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "Download Video",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.text-gray-600.hover:bg-gray-50.hover:text-gray-900.cursor-pointer",
+      "xpath": "/html/body/div[2]/aside[1]/nav[1]/button[2]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 120,
+        "width": 215,
+        "height": 40
+      }
+    },
+    {
+      "index": 2,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-600 hover:bg-gray-50 hover:text-gray-900 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "Channel Manager",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.text-gray-600.hover:bg-gray-50.hover:text-gray-900.cursor-pointer",
+      "xpath": "/html/body/div[2]/aside[1]/nav[1]/button[3]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 164,
+        "width": 215,
+        "height": 40
+      }
+    },
+    {
+      "index": 3,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-600 hover:bg-gray-50 hover:text-gray-900 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "Transcripts",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.text-gray-600.hover:bg-gray-50.hover:text-gray-900.cursor-pointer",
+      "xpath": "/html/body/div[2]/aside[1]/nav[1]/button[4]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 208,
+        "width": 215,
+        "height": 40
+      }
+    },
+    {
+      "index": 4,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-600 hover:bg-gray-50 hover:text-gray-900 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "TrendingBeta",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.text-gray-600.hover:bg-gray-50.hover:text-gray-900.cursor-pointer",
+      "xpath": "/html/body/div[2]/aside[1]/nav[1]/button[5]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 252,
+        "width": 215,
+        "height": 40
+      }
+    },
+    {
+      "index": 5,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-600 hover:bg-gray-50 hover:text-gray-900 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "Hashtag ResearchBeta",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.text-gray-600.hover:bg-gray-50.hover:text-gray-900.cursor-pointer",
+      "xpath": "/html/body/div[2]/aside[1]/nav[1]/button[6]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 296,
+        "width": 215,
+        "height": 60
+      }
+    },
+    {
+      "index": 6,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-600 hover:bg-gray-50 hover:text-gray-900 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "AI ToolsAI",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.text-gray-600.hover:bg-gray-50.hover:text-gray-900.cursor-pointer",
+      "xpath": "/html/body/div[2]/aside[1]/nav[1]/button[7]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 360,
+        "width": 215,
+        "height": 40
+      }
+    },
+    {
+      "index": 7,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-500 hover:bg-gray-50 hover:text-gray-700",
+      "name": null,
+      "value": null,
+      "text": "Support",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.text-gray-500.hover:bg-gray-50.hover:text-gray-700",
+      "xpath": "/html/body/div[2]/aside[1]/div[3]/button[1]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 896.75,
+        "width": 215,
+        "height": 40
+      }
+    },
+    {
+      "index": 8,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-gray-500 hover:bg-gray-50 hover:text-gray-700",
+      "name": null,
+      "value": null,
+      "text": "Settings",
+      "href": null,
+      "selector": "button.w-full.flex.items-center.gap-3.px-3.py-2.5.rounded-lg.transition-all.text-gray-500.hover:bg-gray-50.hover:text-gray-700",
+      "xpath": "/html/body/div[2]/aside[1]/div[3]/button[2]",
+      "visible": true,
+      "position": {
+        "x": 12,
+        "y": 940.75,
+        "width": 215,
+        "height": 40
+      }
+    },
+    {
+      "index": 9,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "hover:text-[#E1306C] transition-colors",
+      "name": null,
+      "value": null,
+      "text": null,
+      "href": null,
+      "selector": "button.hover:text-[#E1306C].transition-colors",
+      "xpath": "/html/body/div[2]/main[1]/header[1]/nav[1]/button[1]",
+      "visible": true,
+      "position": {
+        "x": 264,
+        "y": 18,
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "index": 10,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-9 h-9 flex items-center justify-center rounded-lg bg-gray-50 border border-gray-200 text-gray-400 hover:text-gray-600 hover:border-gray-300 transition-all",
+      "name": null,
+      "value": null,
+      "text": null,
+      "href": null,
+      "selector": "button.w-9.h-9.flex.items-center.justify-center.rounded-lg.bg-gray-50.border.border-gray-200.text-gray-400.hover:text-gray-600.hover:border-gray-300.transition-all",
+      "xpath": "/html/body/div[2]/main[1]/header[1]/div[1]/div[2]/button[1]",
+      "visible": true,
+      "position": {
+        "x": 1816,
+        "y": 51,
+        "width": 36,
+        "height": 36
+      }
+    },
+    {
+      "index": 11,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "w-9 h-9 flex items-center justify-center rounded-lg bg-gray-50 border border-gray-200 text-gray-400 hover:text-gray-600 hover:border-gray-300 transition-all relative",
+      "name": null,
+      "value": null,
+      "text": null,
+      "href": null,
+      "selector": "button.w-9.h-9.flex.items-center.justify-center.rounded-lg.bg-gray-50.border.border-gray-200.text-gray-400.hover:text-gray-600.hover:border-gray-300.transition-all.relative",
+      "xpath": "/html/body/div[2]/main[1]/header[1]/div[1]/div[2]/button[2]",
+      "visible": true,
+      "position": {
+        "x": 1860,
+        "y": 51,
+        "width": 36,
+        "height": 36
+      }
+    },
+    {
+      "index": 12,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "group rounded-xl p-5 text-left transition-all border bg-white border-gray-200 hover:border-gray-300 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "Video DownloaderHD videos without watermark",
+      "href": null,
+      "selector": "button.group.rounded-xl.p-5.text-left.transition-all.border.bg-white.border-gray-200.hover:border-gray-300.cursor-pointer",
+      "xpath": "/html/body/div[2]/main[1]/div[1]/div[1]/div[3]/div[1]/button[1]",
+      "visible": true,
+      "position": {
+        "x": 264,
+        "y": 479,
+        "width": 533.328125,
+        "height": 150
+      }
+    },
+    {
+      "index": 13,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "group rounded-xl p-5 text-left transition-all border bg-white border-gray-200 hover:border-gray-300 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "Channel ManagerMulti-channel analytics",
+      "href": null,
+      "selector": "button.group.rounded-xl.p-5.text-left.transition-all.border.bg-white.border-gray-200.hover:border-gray-300.cursor-pointer",
+      "xpath": "/html/body/div[2]/main[1]/div[1]/div[1]/div[3]/div[1]/button[2]",
+      "visible": true,
+      "position": {
+        "x": 813.328125,
+        "y": 479,
+        "width": 533.328125,
+        "height": 150
+      }
+    },
+    {
+      "index": 14,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "group rounded-xl p-5 text-left transition-all border bg-white border-gray-200 hover:border-gray-300 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "TranscriptsVideo to text conversion",
+      "href": null,
+      "selector": "button.group.rounded-xl.p-5.text-left.transition-all.border.bg-white.border-gray-200.hover:border-gray-300.cursor-pointer",
+      "xpath": "/html/body/div[2]/main[1]/div[1]/div[1]/div[3]/div[1]/button[3]",
+      "visible": true,
+      "position": {
+        "x": 1362.65625,
+        "y": 479,
+        "width": 533.328125,
+        "height": 150
+      }
+    },
+    {
+      "index": 15,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "group rounded-xl p-5 text-left transition-all border bg-white border-gray-200 hover:border-gray-300 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "BetaTrendingDiscover viral content",
+      "href": null,
+      "selector": "button.group.rounded-xl.p-5.text-left.transition-all.border.bg-white.border-gray-200.hover:border-gray-300.cursor-pointer",
+      "xpath": "/html/body/div[2]/main[1]/div[1]/div[1]/div[3]/div[1]/button[4]",
+      "visible": true,
+      "position": {
+        "x": 264,
+        "y": 645,
+        "width": 533.328125,
+        "height": 150
+      }
+    },
+    {
+      "index": 16,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "group rounded-xl p-5 text-left transition-all border bg-white border-gray-200 hover:border-gray-300 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "BetaHashtag ResearchFind trending tags",
+      "href": null,
+      "selector": "button.group.rounded-xl.p-5.text-left.transition-all.border.bg-white.border-gray-200.hover:border-gray-300.cursor-pointer",
+      "xpath": "/html/body/div[2]/main[1]/div[1]/div[1]/div[3]/div[1]/button[5]",
+      "visible": true,
+      "position": {
+        "x": 813.328125,
+        "y": 645,
+        "width": 533.328125,
+        "height": 150
+      }
+    },
+    {
+      "index": 17,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "group rounded-xl p-5 text-left transition-all border bg-white border-gray-200 hover:border-gray-300 cursor-pointer",
+      "name": null,
+      "value": null,
+      "text": "AIAI ToolsCaption & content generator",
+      "href": null,
+      "selector": "button.group.rounded-xl.p-5.text-left.transition-all.border.bg-white.border-gray-200.hover:border-gray-300.cursor-pointer",
+      "xpath": "/html/body/div[2]/main[1]/div[1]/div[1]/div[3]/div[1]/button[6]",
+      "visible": true,
+      "position": {
+        "x": 1362.65625,
+        "y": 645,
+        "width": 533.328125,
+        "height": 150
+      }
+    },
+    {
+      "index": 18,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "inline-flex items-center gap-2 px-4 py-2 font-medium rounded-lg transition-all text-sm bg-[#E1306C] hover:bg-[#C13584] text-white",
+      "name": null,
+      "value": null,
+      "text": "Open Downloader",
+      "href": null,
+      "selector": "button.inline-flex.items-center.gap-2.px-4.py-2.font-medium.rounded-lg.transition-all.text-sm.bg-[#E1306C].hover:bg-[#C13584].text-white",
+      "xpath": "/html/body/div[2]/main[1]/div[1]/div[1]/div[4]/div[1]/button[1]",
+      "visible": true,
+      "position": {
+        "x": 285,
+        "y": 904,
+        "width": 171.859375,
+        "height": 36
+      }
+    },
+    {
+      "index": 19,
+      "tagName": "button",
+      "type": "submit",
+      "id": null,
+      "className": "inline-flex items-center gap-2 px-4 py-2 font-medium rounded-lg transition-all text-sm bg-gray-100 hover:bg-gray-200 text-gray-700",
+      "name": null,
+      "value": null,
+      "text": "Open Manager",
+      "href": null,
+      "selector": "button.inline-flex.items-center.gap-2.px-4.py-2.font-medium.rounded-lg.transition-all.text-sm.bg-gray-100.hover:bg-gray-200.text-gray-700",
+      "xpath": "/html/body/div[2]/main[1]/div[1]/div[1]/div[4]/div[2]/button[1]",
+      "visible": true,
+      "position": {
+        "x": 1109,
+        "y": 904,
+        "width": 151.265625,
+        "height": 36
+      }
+    }
+  ]
+}

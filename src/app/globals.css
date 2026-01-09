@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* LIGHT THEME - Facebook Manager - Facebook Brand Colors */
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Facebook Brand Colors */
+  --color-fb-primary: #1877F2;
+  --color-fb-secondary: #42B72A;
+  --color-fb-dark: #1C2A48;
+  --color-fb-light: #E7F3FF;
+  --color-fb-hover: #166FE5;
+}
+
+* { box-sizing: border-box; }
+
+html { color-scheme: light; }
+
+body {
+  background: #F0F2F5;
+  color: #1C1E21;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #BCC0C4; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #8A8D91; }
+
+::selection { background: #1877F2; color: white; }
+:focus-visible { outline: 2px solid #1877F2; outline-offset: 2px; }
+
+.gradient-facebook {
+  background: linear-gradient(135deg, #1877F2 0%, #0D65D9 100%);
+}
+
+.gradient-text-facebook {
+  background: linear-gradient(135deg, #1877F2, #0D65D9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Legacy support - map old instagram classes to facebook */
+.gradient-instagram { background: linear-gradient(135deg, #1877F2 0%, #0D65D9 100%); }
+.gradient-text-instagram { background: linear-gradient(135deg, #1877F2, #0D65D9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in { animation: fade-in 0.2s ease-out; }
+.animate-slide-up { animation: slide-up 0.25s ease-out; }
