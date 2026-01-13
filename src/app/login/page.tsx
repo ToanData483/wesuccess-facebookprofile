@@ -9,10 +9,11 @@ import {
   MessageCircle,
   Loader2,
 } from "lucide-react";
+import { login } from "@/lib/wesuccess-auth";
 
 /**
  * Login Page - Facebook Manager
- * Form left, Hero right with Facebook branding
+ * Uses WeSuccess Centralized Auth API
  */
 export default function LoginPage() {
   const router = useRouter();
@@ -33,15 +34,12 @@ export default function LoginPage() {
 
     setLoading(true);
 
-    // TODO: Replace with real auth (Supabase)
-    await new Promise((r) => setTimeout(r, 1500));
+    const result = await login(email, password);
 
-    // Mock validation
-    if (email === "demo@wesuccess.vn" && password === "demo123") {
-      localStorage.setItem("auth_session", JSON.stringify({ email, loggedIn: true }));
+    if (result.success) {
       router.push("/");
     } else {
-      setError("Email hoặc mật khẩu không đúng");
+      setError(result.error || "Đăng nhập thất bại");
     }
 
     setLoading(false);
