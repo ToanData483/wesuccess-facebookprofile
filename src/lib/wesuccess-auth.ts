@@ -1,6 +1,7 @@
 /**
  * WeSuccess Centralized Auth Client
  * Connects to wesuccess.vn Auth API
+ * Features: Single device policy, device fingerprint, session management
  */
 
 const AUTH_API_BASE = 'https://wesuccess.vn/api/auth';
@@ -8,11 +9,38 @@ const STORAGE_KEY = 'wesuccess_auth';
 const AUTH_COOKIE = 'wesuccess_token';
 
 /**
+ * Generate simple device fingerprint (browser-based)
+ */
+function generateFingerprint(): string {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx?.fillText('fingerprint', 10, 10);
+
+  const components = [
+    navigator.userAgent,
+    navigator.language,
+    screen.width + 'x' + screen.height,
+    screen.colorDepth,
+    new Date().getTimezoneOffset(),
+    canvas.toDataURL(),
+  ];
+
+  // Simple hash
+  let hash = 0;
+  const str = components.join('|');
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return Math.abs(hash).toString(16);
+}
+
+/**
  * Set cookie with token for middleware access
  */
 function setAuthCookie(token: string): void {
-  // Set cookie to expire in 1 hour (matching JWT expiration)
-  const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString(); // 7 days
   document.cookie = `${AUTH_COOKIE}=${token}; path=/; expires=${expires}; SameSite=Lax`;
 }
 
@@ -33,17 +61,30 @@ export interface AuthUser {
 export interface AuthSession {
   token: string;
   user: AuthUser;
+  sessionId?: string;
+}
+
+export interface SessionInfo {
+  id: string;
+  device_name: string | null;
+  ip_address: string;
+  is_current: boolean;
+  last_activity_at: string;
+  created_at: string;
 }
 
 /**
- * Login with email and password
+ * Login with email and password (creates new session, invalidates others)
  */
 export async function login(email: string, password: string): Promise<{ success: boolean; error?: string; session?: AuthSession }> {
   try {
+    const fingerprint = generateFingerprint();
+
     const response = await fetch(`${AUTH_API_BASE}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      credentials: 'include', // Important for cookies
+      body: JSON.stringify({ email, password, device_fingerprint: fingerprint }),
     });
 
     const data = await response.json();
@@ -52,7 +93,11 @@ export async function login(email: string, password: string): Promise<{ success:
       return { success: false, error: data.error || 'Đăng nhập thất bại' };
     }
 
-    const session: AuthSession = { token: data.token, user: data.user };
+    const session: AuthSession = {
+      token: data.token,
+      user: data.user,
+      sessionId: data.session?.id,
+    };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
     setAuthCookie(data.token);
 
@@ -64,9 +109,17 @@ export async function login(email: string, password: string): Promise<{ success:
 }
 
 /**
- * Logout - clear session
+ * Logout - clear session locally and on server
  */
-export function logout(): void {
+export async function logout(): Promise<void> {
+  try {
+    await fetch(`${AUTH_API_BASE}/logout`, {
+      method: 'POST',
+      credentials: 'include',
+    });
+  } catch (err) {
+    console.error('[WeSuccess Auth] Logout error:', err);
+  }
   localStorage.removeItem(STORAGE_KEY);
   clearAuthCookie();
 }
@@ -98,18 +151,87 @@ export async function verifySession(): Promise<{ valid: boolean; user?: AuthUser
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${session.token}`,
       },
+      credentials: 'include',
     });
 
     const data = await response.json();
 
     if (!response.ok || !data.valid) {
-      logout();
+      await logout();
       return { valid: false };
     }
 
     return { valid: true, user: data.user };
   } catch {
     return { valid: false };
+  }
+}
+
+/**
+ * Get list of active sessions for current user
+ */
+export async function getSessions(): Promise<SessionInfo[]> {
+  const session = getSession();
+  if (!session) return [];
+
+  try {
+    const response = await fetch(`${AUTH_API_BASE}/sessions`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${session.token}`,
+      },
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+    return data.success ? data.sessions : [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Revoke specific session
+ */
+export async function revokeSession(sessionId: string): Promise<boolean> {
+  const session = getSession();
+  if (!session) return false;
+
+  try {
+    const response = await fetch(`${AUTH_API_BASE}/sessions/${sessionId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${session.token}`,
+      },
+      credentials: 'include',
+    });
+
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Logout from all devices except current
+ */
+export async function logoutAllDevices(): Promise<number> {
+  const session = getSession();
+  if (!session) return 0;
+
+  try {
+    const response = await fetch(`${AUTH_API_BASE}/sessions?except_current=true`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${session.token}`,
+      },
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+    return data.success ? data.revoked_count : 0;
+  } catch {
+    return 0;
   }
 }
 
