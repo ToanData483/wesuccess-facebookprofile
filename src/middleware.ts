@@ -6,7 +6,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const AUTH_COOKIE = 'wesuccess_token';
+// Server-issued HttpOnly cookie scoped to .wesuccess.app (set by central /api/auth/login).
+const AUTH_COOKIE = 'ws_session';
 
 // Public routes that don't require authentication
 const PUBLIC_ROUTES = ['/login', '/api'];

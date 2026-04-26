@@ -2,18 +2,16 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { getSession, hydrateFromCookie, verifySession, logout, type AuthUser, type AuthSession } from "@/lib/wesuccess-auth";
+import { getCachedUser, verifySession, logout, type AuthUser } from "@/lib/wesuccess-auth";
 
 interface AuthContextType {
   user: AuthUser | null;
-  session: AuthSession | null;
   loading: boolean;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
-  session: null,
   loading: true,
   logout: () => {},
 });
@@ -27,8 +25,9 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [session, setSession] = useState<AuthSession | null>(null);
+  // Optimistic render: paint with cached user while we re-validate against the server.
+  // Token lives only in the HttpOnly ws_session cookie — JS never sees it.
+  const [user, setUser] = useState<AuthUser | null>(() => getCachedUser());
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
@@ -41,24 +40,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return;
       }
 
-      // Try local session first, then rebuild from shared cookie if available
-      // (so a user logged in on a sibling sub-app doesn't see the login form here)
-      const currentSession = getSession() ?? (await hydrateFromCookie());
-
-      if (!currentSession) {
-        setLoading(false);
-        return;
-      }
-
-      // Verify token with server
+      // The browser carries ws_session automatically (cookie scoped to .wesuccess.app);
+      // /api/auth/me validates it server-side and returns the user.
       const result = await verifySession();
 
       if (result.valid && result.user) {
         setUser(result.user);
-        setSession(currentSession);
       } else {
-        // Invalid token, clear and redirect
-        logout();
+        setUser(null);
         router.push("/login");
       }
 
@@ -68,15 +57,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     checkAuth();
   }, [pathname, router]);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     setUser(null);
-    setSession(null);
     router.push("/login");
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, logout: handleLogout }}>
+    <AuthContext.Provider value={{ user, loading, logout: handleLogout }}>
       {children}
     </AuthContext.Provider>
   );
