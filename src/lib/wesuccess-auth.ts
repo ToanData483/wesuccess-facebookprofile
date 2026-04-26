@@ -37,18 +37,28 @@ function generateFingerprint(): string {
 }
 
 /**
+ * If we're on a *.wesuccess.app sub-app, return ".wesuccess.app" so the cookie is shared
+ * across all sub-apps (one login covers them all). Returns empty string for other hosts
+ * (vercel.app preview URLs, localhost) so the cookie stays scoped to that host.
+ */
+function authCookieDomainAttr(): string {
+  if (typeof window === 'undefined') return '';
+  return window.location.hostname.endsWith('.wesuccess.app') ? '; domain=.wesuccess.app' : '';
+}
+
+/**
  * Set cookie with token for middleware access
  */
 function setAuthCookie(token: string): void {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString(); // 7 days
-  document.cookie = `${AUTH_COOKIE}=${token}; path=/; expires=${expires}; SameSite=Lax`;
+  document.cookie = `${AUTH_COOKIE}=${token}; path=/; expires=${expires}; SameSite=Lax${authCookieDomainAttr()}`;
 }
 
 /**
  * Clear auth cookie
  */
 function clearAuthCookie(): void {
-  document.cookie = `${AUTH_COOKIE}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+  document.cookie = `${AUTH_COOKIE}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT${authCookieDomainAttr()}`;
 }
 
 export interface AuthUser {
@@ -125,6 +135,15 @@ export async function logout(): Promise<void> {
 }
 
 /**
+ * Read a cookie value by name from document.cookie.
+ */
+function readCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.split('; ').find(c => c.startsWith(`${name}=`));
+  return match ? decodeURIComponent(match.slice(name.length + 1)) : null;
+}
+
+/**
  * Get current session from localStorage
  */
 export function getSession(): AuthSession | null {
@@ -132,6 +151,35 @@ export function getSession(): AuthSession | null {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) return null;
     return JSON.parse(stored) as AuthSession;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * If localStorage is empty but a shared `wesuccess_token` cookie is present
+ * (set by another sub-app on the same parent domain), rebuild the local session
+ * by calling /auth/me. Returns the restored session, or null if no cookie or it's invalid.
+ */
+export async function hydrateFromCookie(): Promise<AuthSession | null> {
+  if (getSession()) return getSession();
+
+  const token = readCookie(AUTH_COOKIE);
+  if (!token) return null;
+
+  try {
+    const response = await fetch(`${AUTH_API_BASE}/me`, {
+      method: 'GET',
+      headers: { 'Authorization': `Bearer ${token}` },
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+    if (!response.ok || !data.success || !data.user) return null;
+
+    const session: AuthSession = { token, user: data.user };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    return session;
   } catch {
     return null;
   }

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { getSession, verifySession, logout, type AuthUser, type AuthSession } from "@/lib/wesuccess-auth";
+import { getSession, hydrateFromCookie, verifySession, logout, type AuthUser, type AuthSession } from "@/lib/wesuccess-auth";
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -41,7 +41,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return;
       }
 
-      const currentSession = getSession();
+      // Try local session first, then rebuild from shared cookie if available
+      // (so a user logged in on a sibling sub-app doesn't see the login form here)
+      const currentSession = getSession() ?? (await hydrateFromCookie());
 
       if (!currentSession) {
         setLoading(false);
