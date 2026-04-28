@@ -8,7 +8,11 @@
  * localStorage caches only user info for fast first paint; never the token.
  */
 
-const AUTH_API_BASE = 'https://wesuccess.vn/api/auth';
+// Auth API runs on auth.wesuccess.app (same eTLD+1 as sub-apps).
+// This is critical: cookies set by the API at .wesuccess.app are only accepted
+// by the browser if the API host is itself within .wesuccess.app. wesuccess.vn
+// can't set cookies for .wesuccess.app (cross-domain attack prevention).
+const AUTH_API_BASE = 'https://auth.wesuccess.app/api/auth';
 const USER_CACHE_KEY = 'wesuccess_user';
 
 /**
